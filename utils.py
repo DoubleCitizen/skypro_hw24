@@ -2,7 +2,7 @@ import os
 import re
 
 
-def do_cmd(cmd, value, data):
+def do_cmd(cmd: str, value: str, data: list[str]) -> list:
     if cmd == 'filter':
         result = list(filter(lambda record: value in record, data))
     elif cmd == 'map':
@@ -18,15 +18,11 @@ def do_cmd(cmd, value, data):
         result = [line for line in list(data)[:col_num]]
     elif cmd == 'regex':
         prog = re.compile(value)
-        print(len(data))
         result = prog.findall(str(data))
-
-        print(result)
-        print(type(result))
     return result
 
 
-def do_query(params, DATA_DIR):
+def do_query(params: dict, DATA_DIR: str) -> list:
     with open(os.path.join(DATA_DIR, params["file_name"])) as file:
         file_data = file.readlines()
 
@@ -35,7 +31,6 @@ def do_query(params, DATA_DIR):
     num = 1
     cmd = 'cmd' + str(num)
     value = 'value' + str(num)
-    print(params.keys())
 
     while cmd in params.keys() and value in params.keys():
         if cmd in params.keys():
