@@ -19,7 +19,6 @@ def do_cmd(cmd, value, data):
     elif cmd == 'regex':
         prog = re.compile(value)
         print(len(data))
-        result = []
         result = prog.findall(str(data))
 
         print(result)
